@@ -41,39 +41,36 @@ public class Differ {
         HashMap<String,Object> fileMap2 =
                 new ObjectMapper().readValue(content2, HashMap.class);
 
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>(fileMap2);
 
-        for (var fileMap : fileMap2.entrySet()) {
-            String key = fileMap.getKey();
-            if (fileMap1.containsKey(key)) {
-                if (fileMap1.get(key).equals(fileMap2.get(key))) {
-                    result.put("   " + key, fileMap1.get(key));
-                }
-                if (!fileMap1.get(key).equals(fileMap2.get(key))) {
+        for (var key : fileMap1.keySet()) {
+            if (result.containsKey(key)) {
+                if (!fileMap1.get(key).equals(result.get(key))) {
+                    result.put(" + " + key, result.get(key));
                     result.put(" - " + key, fileMap1.get(key));
-                    result.put(" + " + key, fileMap2.get(key));
+                    result.remove(key);
+                    fileMap2.remove(key);
                 }
             }
-            if(!fileMap1.containsKey(key)) {
-                result.put(" + " + key, fileMap2.get(key));
-            }
-        }
-
-        for (var fileMap : fileMap1.entrySet()) {
-            String key = fileMap.getKey();
-            if(!fileMap2.containsKey(key)) {
+            if (!result.containsKey(key)) {
                 result.put(" - " + key, fileMap1.get(key));
             }
         }
 
-        List sortedKeys=new ArrayList(result.keySet());
-        Collections.sort(sortedKeys);
-
-
-        for (var entry : sortedKeys) {
-            System.out.println(entry + ": " + result.get(entry));
+        for (var key : fileMap2.keySet()) {
+            if (fileMap1.containsKey(key)) {
+                result.put("   " + key, result.get(key));
+                result.remove(key);
+            } else  {
+                result.put(" + " + key, result.get(key));
+                result.remove(key);
+            }
         }
 
+        System.out.println();
+        for (var key : result.keySet()) {
+            System.out.println(key + ": " + result.get(key));
+        }
 
     }
 }
