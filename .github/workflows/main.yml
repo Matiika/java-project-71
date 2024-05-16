@@ -16,8 +16,9 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/gradle-build-action@v3
         with:
-          build-root-directory: app
           gradle-version: 8.7
+          arguments: build
+          build-root-directory: app
       - run: make lint
       - run: make test
       - name: Publish code coverage
