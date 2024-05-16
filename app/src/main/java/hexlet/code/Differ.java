@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Comparator;
+import java.util.ArrayList;
 
 
 public class Differ {
@@ -30,15 +33,12 @@ public class Differ {
         // Читаем файл
         String content1 = Files.readString(path1);
         String content2 = Files.readString(path2);
-        // Выводим содержимое
-        System.out.println(content1);
-        System.out.println(content2);
 
 
-        HashMap<String,Object> fileMap1 =
+        HashMap<String, Object> fileMap1 =
                 new ObjectMapper().readValue(content1, HashMap.class);
 
-        HashMap<String,Object> fileMap2 =
+        HashMap<String, Object> fileMap2 =
                 new ObjectMapper().readValue(content2, HashMap.class);
 
         Map<String, Object> result = new HashMap<>(fileMap2);
@@ -67,8 +67,19 @@ public class Differ {
             }
         }
 
+        Comparator<String> comparator = new Comparator<String>() {
+            @Override
+            public int compare(String key1, String key2) {
+                // define your custom sorting condition here
+                return key1.substring(3).compareTo(key2.substring(3));
+            }
+        };
+
+        ArrayList<String> sortedKeys = new ArrayList<>(result.keySet());
+        sortedKeys.sort(comparator);
+
         System.out.println();
-        for (var key : result.keySet()) {
+        for (var key : sortedKeys) {
             System.out.println(key + ": " + result.get(key));
         }
 
