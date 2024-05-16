@@ -1,19 +1,28 @@
+# Makefile
+
+.DEFAULT_GOAL := build-run
+
+install:
+	make -C app install
+
 run-dist:
-    make -C run-dist
+	make -C app run-dist
 
 build:
-    make -C app build
+	make -C app build
 
-clean:
-    make -C app clean
+run:
+	make -C app run
 
 test:
-    make -C app test
+	make -C app test
 
 report:
-    make -C app report
+	make -C app report
 
 lint:
-    make -C app lint
+	make -C app lint
+
+build-run: build run
 
 .PHONY: build
