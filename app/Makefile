@@ -22,10 +22,10 @@ test:
 	./gradlew test
 
 report:
-	.app/gradlew jacocoTestReport
+	gradlew jacocoTestReport
 
 lint:
-	./gradlew checkstyleMain
+	.app/gradlew checkstyleMain
 
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
