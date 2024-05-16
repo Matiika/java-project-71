@@ -14,14 +14,14 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      - uses: gradle/gradle-build-action@v3
+      - uses: gradle/actions/setup-gradle@v3 
         with:
           arguments: build
           build-root-directory: app
       - run: make lint
       - run: make test
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.1
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: app/src/main/java
