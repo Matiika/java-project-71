@@ -28,8 +28,18 @@ application {
     mainClass = "hexlet.code.App"
 }
 
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
         xml.required = true
     }
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
