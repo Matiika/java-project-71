@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 
 public class Differ {
-    public static void generate(String filepath1, String filepath2) throws Exception {
+    public static ArrayList<String> generate(String filepath1, String filepath2) throws Exception {
         // Формируем абсолютный путь,
         // если filePath будет содержать относительный путь,
         // то мы всегда будет работать с абсолютным
@@ -46,41 +46,43 @@ public class Differ {
         for (var key : fileMap1.keySet()) {
             if (result.containsKey(key)) {
                 if (!fileMap1.get(key).equals(result.get(key))) {
-                    result.put(" + " + key, result.get(key));
-                    result.put(" - " + key, fileMap1.get(key));
+                    result.put("  + " + key, result.get(key));
+                    result.put("  - " + key, fileMap1.get(key));
                     result.remove(key);
                     fileMap2.remove(key);
                 }
             }
             if (!result.containsKey(key)) {
-                result.put(" - " + key, fileMap1.get(key));
+                result.put("  - " + key, fileMap1.get(key));
             }
         }
 
         for (var key : fileMap2.keySet()) {
             if (fileMap1.containsKey(key)) {
-                result.put("   " + key, result.get(key));
+                result.put("    " + key, result.get(key));
                 result.remove(key);
             } else  {
-                result.put(" + " + key, result.get(key));
+                result.put("  + " + key, result.get(key));
                 result.remove(key);
             }
         }
 
-        Comparator<String> comparator = new Comparator<String>() {
-            @Override
-            public int compare(String key1, String key2) {
-                // define your custom sorting condition here
-                return key1.substring(3).compareTo(key2.substring(3));
-            }
-        };
+        Comparator<String> comparator = Comparator.comparing(key -> key.substring(3));
 
-        ArrayList<String> sortedKeys = new ArrayList<>(result.keySet());
-        sortedKeys.sort(comparator);
-
-        for (var key : sortedKeys) {
-            System.out.println(key + ": " + result.get(key));
+        ArrayList<String> sortedResult = new ArrayList<>();
+        sortedResult.add("    ");
+        for (var key : result.keySet()) {
+            sortedResult.add(key + ": " + result.get(key));
         }
+        sortedResult.sort(comparator);
+        sortedResult.set(0, "{");
+        sortedResult.add("}");
 
+
+        for (var str : sortedResult) {
+            System.out.println(str);
+        }
+        return sortedResult;
     }
+
 }
