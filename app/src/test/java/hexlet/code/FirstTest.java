@@ -1,8 +1,8 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import  static hexlet.code.Differ.generate;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +20,6 @@ public class FirstTest {
                 "  - timeout: 50",
                 "  + verbose: true",
                 "}"));
-        assertEquals(actual, expected);
+        assertTrue(actual.equals(expected));
     }
 }
