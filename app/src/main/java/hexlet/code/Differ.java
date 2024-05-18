@@ -78,7 +78,6 @@ public class Differ {
         ArrayList<String> sortedKeys = new ArrayList<>(result.keySet());
         sortedKeys.sort(comparator);
 
-        System.out.println();
         for (var key : sortedKeys) {
             System.out.println(key + ": " + result.get(key));
         }
