@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,11 +33,9 @@ public class Differ {
         String content2 = Files.readString(path2);
 
 
-        HashMap<String, Object> fileMap1 =
-                new ObjectMapper().readValue(content1, HashMap.class);
+        Map<String, Object> fileMap1 = Parser.parseYaml(content1);
 
-        HashMap<String, Object> fileMap2 =
-                new ObjectMapper().readValue(content2, HashMap.class);
+        Map<String, Object> fileMap2 = Parser.parseYaml(content2);
 
         Map<String, Object> result = new HashMap<>(fileMap2);
 
