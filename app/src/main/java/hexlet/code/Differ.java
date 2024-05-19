@@ -40,8 +40,22 @@ public class Differ {
         Map<String, Object> result = new HashMap<>(fileMap2);
 
         for (var key : fileMap1.keySet()) {
-            if (result.containsKey(key)) {
+            Object objMap1 = fileMap1.get(key);
+            Object objResult = result.get(key);
+            System.out.println(objMap1 + " " + objResult);
+            if (objResult != null && !objResult.equals(objMap1)) {
+                result.put("  + " + key, result.get(key));
+                result.put("  - " + key, fileMap1.get(key));
+                result.remove(key);
+                fileMap2.remove(key);
+            }
+            if (objResult == null) {
+                result.put("  - " + key, objMap1);
+            }
+
+        /*    if (result.containsKey(key)) {
                 if (!fileMap1.get(key).equals(result.get(key))) {
+
                     result.put("  + " + key, result.get(key));
                     result.put("  - " + key, fileMap1.get(key));
                     result.remove(key);
@@ -50,15 +64,18 @@ public class Differ {
             }
             if (!result.containsKey(key)) {
                 result.put("  - " + key, fileMap1.get(key));
-            }
+            }*/
         }
 
         for (var key : fileMap2.keySet()) {
-            if (fileMap1.containsKey(key)) {
-                result.put("    " + key, result.get(key));
+            Object objMap1 = fileMap1.get(key);
+            Object objResult = result.get(key);
+            System.out.println(objMap1 + " " + objResult);
+            if (objMap1 != null) {
+                result.put("    " + key, objResult);
                 result.remove(key);
             } else  {
-                result.put("  + " + key, result.get(key));
+                result.put("  + " + key, objResult);
                 result.remove(key);
             }
         }
