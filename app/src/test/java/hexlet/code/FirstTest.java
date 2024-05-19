@@ -22,4 +22,18 @@ public class FirstTest {
                 "}"));
         assertTrue(actual.equals(expected));
     }
+
+    @Test
+    public void testYMLCompare() throws Exception {
+        ArrayList<String> actual = generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml");
+        ArrayList<String> expected = new ArrayList<>(Arrays.asList("{",
+                "  - follow: false",
+                "    host: hexlet.io",
+                "  - proxy: 123.234.53.22",
+                "  + timeout: 20",
+                "  - timeout: 50",
+                "  + verbose: true",
+                "}"));
+        assertTrue(actual.equals(expected));
+    }
 }
