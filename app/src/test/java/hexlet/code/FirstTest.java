@@ -16,8 +16,8 @@ public class FirstTest {
                 "  - follow: false",
                 "    host: hexlet.io",
                 "  - proxy: 123.234.53.22",
-                "  + timeout: 20",
                 "  - timeout: 50",
+                "  + timeout: 20",
                 "  + verbose: true",
                 "}"));
         assertTrue(actual.equals(expected));
@@ -30,8 +30,8 @@ public class FirstTest {
                 "  - follow: false",
                 "    host: hexlet.io",
                 "  - proxy: 123.234.53.22",
-                "  + timeout: 20",
                 "  - timeout: 50",
+                "  + timeout: 20",
                 "  + verbose: true",
                 "}"));
         assertTrue(actual.equals(expected));
