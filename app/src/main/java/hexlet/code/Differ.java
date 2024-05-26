@@ -4,7 +4,6 @@ package hexlet.code;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -12,13 +11,7 @@ import java.util.HashMap;
 
 public class Differ {
 
-    public static ArrayList<String> generate(String filepath1, String filepath2) throws Exception {
-        Stylish defaultStyler = new Stylish();
-        ArrayList<String> result = generate(filepath1, filepath2, defaultStyler);
-        return result;
-    }
-
-    public static ArrayList<String> generate(String filepath1, String filepath2, Stylish styler) throws Exception {
+    public static String generate(String filepath1, String filepath2) throws Exception {
         // Формируем абсолютный путь,
         // если filePath будет содержать относительный путь,
         // то мы всегда будет работать с абсолютным
@@ -45,48 +38,32 @@ public class Differ {
 
         Map<String, Object> fileMap2 = Parser.parseYaml(content2);
 
-        Map<String, Object> result = new HashMap<>(fileMap2);
+        Map<String, OldNewValue> result = new HashMap<>();
 
         for (var key : fileMap1.keySet()) {
-            Object objMap1 = fileMap1.get(key);
-            Object objResult = result.get(key);
-
-            if (objResult != null && !objResult.equals(objMap1)) {
-                result.put("  + " + key, result.get(key));
-                result.put("  - " + key, fileMap1.get(key));
-                result.remove(key);
-                fileMap2.remove(key);
+            if (fileMap2.containsKey(key)) {
+                var oldValue = fileMap1.get(key);
+                var newValue = fileMap2.get(key);
+                result.put(key, new OldNewValue(oldValue, newValue));
             }
-            if (objResult == null) {
-                result.put("  - " + key, objMap1);
+            if (!fileMap2.containsKey(key)) {
+                var oldValue = fileMap1.get(key);
+                var newValue = "";
+                result.put(key, new OldNewValue(oldValue, newValue));
             }
         }
 
         for (var key : fileMap2.keySet()) {
-            Object objMap1 = fileMap1.get(key);
-            Object objResult = result.get(key);
-
-            if (objMap1 != null && objResult != null) {
-                result.put("    " + key, objResult);
-                result.remove(key);
-            } else  {
-                result.put("  + " + key, objResult);
-                result.remove(key);
+            if (!result.containsKey(key)) {
+                var oldValue = "";
+                var newValue = fileMap2.get(key);
+                result.put(key, new OldNewValue(oldValue, newValue));
             }
         }
 
-        ArrayList<String> sortedResult = new ArrayList<>();
-        sortedResult.add("    ");
-        for (var key : result.keySet()) {
-            sortedResult.add(key + ": " + result.get(key));
-        }
-
-        styler.resultToStyle(sortedResult);
-
-        for (var str : sortedResult) {
-            System.out.println(str);
-        }
-        return sortedResult;
+        String finalResult = Stylish.resultToStyle(result);
+        System.out.println(finalResult);
+        return finalResult;
     }
 
 }
