@@ -19,6 +19,7 @@ dependencies {
     implementation ("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2")
     implementation ("info.picocli:picocli:4.7.6")
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.11.3")
+    implementation ("org.apache.commons:commons-lang3:3.12.0")
 }
 
 tasks.test {

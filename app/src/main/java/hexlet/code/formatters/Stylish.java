@@ -40,6 +40,7 @@ public class Stylish {
             }
         }
         finalResult += "\n}";
+        System.out.println(finalResult);
         return finalResult;
     }
 }

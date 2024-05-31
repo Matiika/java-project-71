@@ -33,6 +33,7 @@ public class Plain {
                 finalResult += "\nProperty '" + key + "' was updated. From " + oldValueString + " to " + newValueString;
             }
         }
+        System.out.println(finalResult);
         return finalResult;
     }
 

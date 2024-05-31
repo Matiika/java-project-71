@@ -41,7 +41,6 @@ public class Differ {
         }
 
         String finalResult = Formatter.formatterChoose(result, formatName);
-        System.out.println(finalResult);
 
         return finalResult;
     }
