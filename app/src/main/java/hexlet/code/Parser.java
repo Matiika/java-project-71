@@ -9,10 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Parser {
-    public static Map<String, Object> parseFile(String filepath) throws Exception {
+    public static HashMap parseFile(String filepath) throws Exception {
         // Формируем абсолютный путь,
         // если filePath будет содержать относительный путь,
         // то мы всегда будет работать с абсолютным
@@ -33,11 +32,11 @@ public class Parser {
             return parseJson(content1);
         }
     }
-    public static Map<String, Object> parseYaml(String content) throws Exception  {
+    public static HashMap parseYaml(String content) throws Exception  {
         return new YAMLMapper().readValue(content, HashMap.class);
     }
 
-    public static Map<String, Object> parseJson(String content) throws Exception  {
+    public static HashMap parseJson(String content) throws Exception  {
         return new ObjectMapper().readValue(content, HashMap.class);
     }
 }

@@ -10,10 +10,7 @@ public class Stylish {
 
 
     public static String resultToStyle(Map<String, OldNewValue> result) {
-        ArrayList<String> sortedKeys = new ArrayList<>();
-        for (var key : result.keySet()) {
-            sortedKeys.add(key);
-        }
+        ArrayList<String> sortedKeys = new ArrayList<>(result.keySet());
         sortedKeys.sort(Comparator.naturalOrder());
         String finalResult = "{";
 

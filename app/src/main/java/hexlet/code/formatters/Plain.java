@@ -10,8 +10,7 @@ import java.util.List;
 public class Plain {
     public static String resultToStyle(Map<String, OldNewValue> result) {
         String finalResult = "";
-        ArrayList<String> sortedKeys = new ArrayList<>();
-        sortedKeys.addAll(result.keySet());
+        ArrayList<String> sortedKeys = new ArrayList<>(result.keySet());
         sortedKeys.sort(Comparator.naturalOrder());
 
         for (var key : sortedKeys) {

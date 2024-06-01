@@ -40,9 +40,7 @@ public class Differ {
             }
         }
 
-        String finalResult = Formatter.formatterChoose(result, formatName);
-
-        return finalResult;
+        return Formatter.formatterChoose(result, formatName);
     }
 
 }
