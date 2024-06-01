@@ -13,6 +13,7 @@ public class Plain {
         ArrayList<String> sortedKeys = new ArrayList<>();
         sortedKeys.addAll(result.keySet());
         sortedKeys.sort(Comparator.naturalOrder());
+
         for (var key : sortedKeys) {
             var oldValue = result.get(key).getOldValue();
             var newValue = result.get(key).getNewValue();
@@ -33,7 +34,8 @@ public class Plain {
                 finalResult += "\nProperty '" + key + "' was updated. From " + oldValueString + " to " + newValueString;
             }
         }
-        System.out.println(finalResult);
+
+        System.out.println(finalResult.replaceAll("^(\\s*\\n)", ""));
         return finalResult;
     }
 
