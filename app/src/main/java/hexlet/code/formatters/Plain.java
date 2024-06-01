@@ -36,6 +36,7 @@ public class Plain {
         }
 
         System.out.println(finalResult.replaceAll("^(\\s*\\n)", ""));
+        finalResult = finalResult.replaceAll("^(\\s*\\n)", "");
         return finalResult;
     }
 

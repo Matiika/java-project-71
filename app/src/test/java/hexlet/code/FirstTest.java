@@ -42,7 +42,7 @@ public class FirstTest {
         String actual = Differ.generate("./src/test/resources/file1.json",
                 "./src/test/resources/file2.json", "plain");
         String expected = """
-                \nProperty 'chars2' was updated. From [complex value] to false
+                Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
                 Property 'default' was updated. From null to [complex value]
                 Property 'id' was updated. From 45 to null
@@ -94,7 +94,7 @@ public class FirstTest {
         String actual = Differ.generate("./src/test/resources/file1.yml",
                 "./src/test/resources/file2.yml", "plain");
         String expected = """
-                \nProperty 'chars2' was updated. From [complex value] to false
+                Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
                 Property 'default' was updated. From null to [complex value]
                 Property 'id' was updated. From 45 to null
