@@ -27,22 +27,15 @@ public class Differ {
     }
 
     public static HashMap readFile(String filepath) throws Exception {
-        Path path = Paths.get(filepath);
-        Path path1 = path.toAbsolutePath().normalize();
-
+        Path path = Paths.get(filepath).toAbsolutePath().normalize();
         // Проверяем существование файла
-        if (!Files.exists(path1)) {
-            throw new Exception("File '" + path1 + "' does not exist");
+        if (!Files.exists(path)) {
+            throw new Exception("File '" + path + "' does not exist");
         }
-
         // Читаем файл
-        String content1 = Files.readString(path1);
+        String content1 = Files.readString(path);
 
-        if (filepath.contains(".yml") || filepath.contains(".yaml")) {
-            return Parser.parseYaml(content1);
-        } else {
-            return Parser.parseJson(content1);
-        }
+        return Parser.findFileTypeAndParse(content1, filepath);
     }
 
 }
