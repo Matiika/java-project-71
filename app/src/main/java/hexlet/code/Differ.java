@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,11 +19,13 @@ public class Differ {
 
         Map<String, Object> fileMap1 = readFile(filepath1);
         Map<String, Object> fileMap2 = readFile(filepath2);
-        Map<String, OldNewValue> result = DifferenceFinder.findDifferences(fileMap1, fileMap2);
-//        String fileResult = Formatter.formatterChoose(result, formatName);
-//        Files.write(Paths.get("./src/test/resources/fixtures/resultTestYMLPlain.txt"), fileResult.getBytes());
+  //      Map<String, OldNewValue> result = DifferenceFinder.findDifferences(fileMap1, fileMap2);
+        Map<String, List<Object>> result = DifferenceFinder.findDifferencesToMap(fileMap1, fileMap2);
 
-        return Formatter.formatterChoose(result, formatName);
+   //     String fileResult = Formatter.formatterChooseMap(result, formatName);
+    //    Files.write(Paths.get("./src/test/resources/fixtures/resultTestJson.txt"), fileResult.getBytes());
+
+        return Formatter.formatterChooseMap(result, formatName);
 
     }
 

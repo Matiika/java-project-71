@@ -16,9 +16,17 @@ public class FirstTest {
     }
 
     @Test
-    public void testJsonCompareStylish() throws Exception {
+    public void testJsonCompareEmpty() throws Exception {
         String actual = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json");
-        String expected = fileToString("./src/test/resources/fixtures/resultTestJsonStylish.txt");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestStylish.txt");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testJsonCompareStylish() throws Exception {
+        String actual = Differ.generate("./src/test/resources/file1.json", "./src/test/resources/file2.json",
+                "stylish");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestStylish.txt");
         assertEquals(actual, expected);
     }
 
@@ -26,14 +34,29 @@ public class FirstTest {
     public void testJsonComparePlain() throws Exception {
         String actual = Differ.generate("./src/test/resources/file1.json",
                 "./src/test/resources/file2.json", "plain");
-        String expected = fileToString("./src/test/resources/fixtures/resultTestJsonPlain.txt");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestPlain.txt");
         assertEquals(actual, expected);
     }
 
     @Test
-    public void testYMLCompareStylish() throws Exception {
+    public void testJsonCompareJson() throws Exception {
+        String actual = Differ.generate("./src/test/resources/file1.json",
+                "./src/test/resources/file2.json", "json");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestJson.txt");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testYMLCompareEmpty() throws Exception {
         String actual = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml");
-        String expected = fileToString("./src/test/resources/fixtures/resultTestYMLStylish.txt");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestStylish.txt");
+        assertEquals(actual, expected);
+    }
+    @Test
+    public void testYMLCompareStylish() throws Exception {
+        String actual = Differ.generate("./src/test/resources/file1.yml", "./src/test/resources/file2.yml",
+                "stylish");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestStylish.txt");
         assertEquals(actual, expected);
     }
 
@@ -41,7 +64,15 @@ public class FirstTest {
     public void testYMLComparePlain() throws Exception {
         String actual = Differ.generate("./src/test/resources/file1.yml",
                 "./src/test/resources/file2.yml", "plain");
-        String expected = fileToString("./src/test/resources/fixtures/resultTestYMLPlain.txt");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestPlain.txt");
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testYMLCompareJson() throws Exception {
+        String actual = Differ.generate("./src/test/resources/file1.yml",
+                "./src/test/resources/file2.yml", "json");
+        String expected = fileToString("./src/test/resources/fixtures/resultTestJson.txt");
         assertEquals(actual, expected);
     }
 }
