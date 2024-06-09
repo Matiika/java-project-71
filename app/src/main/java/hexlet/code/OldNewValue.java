@@ -1,19 +1,19 @@
 package hexlet.code;
 
 public class OldNewValue {
-    private Object oldValue;
-    private Object newValue;
+    private static Object oldValue;
+    private static Object newValue;
 
     public OldNewValue(Object oldValue, Object newValue) {
         this.oldValue = oldValue;
         this.newValue = newValue;
     }
 
-    public Object getOldValue() {
+    public static Object getOldValue() {
         return oldValue;
     }
 
-    public Object getNewValue() {
+    public static Object getNewValue() {
         return newValue;
     }
 
